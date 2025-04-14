@@ -1,65 +1,30 @@
-**mac_crash_audit.sh**
-A full-featured macOS crash and system audit script that gathers key diagnostic information from the last 3 days, including shutdown causes, kernel panics, security agents, update errors, and more.
-Outputs a timestamped report to your Desktop with a real-time progress bar and clear step-by-step structure.
+macOS Crash Audit - Quick Setup Guide
 
-**What It Does**
-This script runs a 7-step diagnostic audit on a macOS system and saves the results to a .txt file. It uses macOS’s unified logging system and command-line tools to extract recent system issues or unusual behaviour. Each step appends to the report and displays a live progress bar in the terminal.
+First-time setup
 
-**Steps performed:**
-
-**FileVault Status**
-
-Checks whether FileVault disk encryption is enabled.
-
-**Recent Shutdown Causes**
-
-Parses logs from the past 3 days for shutdown reasons (e.g., power loss, kernel panic, etc.).
-
-**Kernel Panics**
-
-Searches for signs of recent kernel panics or system traps in the logs.
-
-**CPU Wake Violations**
-
-Identifies violations related to CPU wake limits (e.g., apps preventing proper sleep).
-
-**Firmware or ANE/BridgeOS Warnings**
-
-Scans for firmware-related errors, including Apple Neural Engine and BridgeOS events.
-
-**Update & Install Issues**
-
-Reviews logs from update/install daemons (softwareupdated, osinstallersetupd) for failure or error messages.
-
-**Active Security / MDM Agents**
-
-Lists currently running processes related to common security or MDM tools like Intune, Zscaler, GlobalProtect, etc.
-
-**Output**
-Saves a detailed report to your Desktop with a filename like:
-mac_crash_audit_20250403_104512.txt
-
-Each step is clearly labeled with its findings or a “None found” message if nothing was detected.
-
-**How to Use**
-Download or copy the script to your Mac.
-
-Open Terminal and make it executable:
-
-bash
+Download the mac_crash_audit.sh script
+Open Terminal (find it in Applications > Utilities > Terminal)
+Navigate to your Downloads folder (or wherever the script is saved):
+cd ~/Downloads
+Make the script executable:
 chmod +x mac_crash_audit.sh
-Run it:
-
-bash
+Run the script:
 ./mac_crash_audit.sh
-View the output file on your Desktop after it completes.
 
-**Requirements**
-macOS 10.15+ (uses log show, available in Catalina and later)
+By default, it will check logs from the past 1 day. To specify a different timeframe:
+./mac_crash_audit.sh 3    # Checks the past 3 days
 
-Admin privileges not required
+If you get permission errors, you may need to run with admin privileges:
+sudo ./mac_crash_audit.sh
 
-Internet not required
+The script will create a report on your Desktop named mac_crash_audit_YYYYMMDD_HHMMSS.txt with system diagnostics.
 
-**Tip**
-You can adjust the --last 3d parameter in the log queries to scan a different time window (e.g. --last 1w for one week).
+If SEP-related issues are detected (which may cause the pink screen reboot loop), the script will automatically collect a full system diagnostic (sysdiagnose) and save it to your Desktop. This requires admin privileges and may take several minutes to complete.
+
+Notes
+
+The script requires admin permissions (sudo) to access all system logs and collect sysdiagnose
+The report shows FileVault status, system crashes, update errors, and SEP-related issues
+No data is sent outside your computer
+The script specifically looks for the SEP-related pink screen reboot loop issue
+If problems are found, both the basic report and the full sysdiagnose file should be provided to Apple Support

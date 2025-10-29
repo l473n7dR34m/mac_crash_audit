@@ -1,7 +1,7 @@
 # macOS Crash Audit - Setup & Usage Guide
 
 ## Overview
-This enhanced script performs a comprehensive audit of your Mac for:
+This script performs a comprehensive audit of your Mac for:
 - System crashes and kernel panics
 - Hardware errors (disk, memory, SMC, T2 chip)
 - GPU crashes and graphics issues

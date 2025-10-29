@@ -1,7 +1,7 @@
 # macOS Crash Audit - Setup & Usage Guide
 
 ## Overview
-This script performs a comprehensive audit of your Mac for:
+This enhanced script performs a comprehensive audit of your Mac for:
 - System crashes and kernel panics
 - Hardware errors (disk, memory, SMC, T2 chip)
 - GPU crashes and graphics issues
@@ -27,20 +27,20 @@ It creates a detailed report and automatically collects full system diagnostics 
 
 ## Usage Options
 
-### Standard Audit
+### Standard Audit (Check Last 7 Days)
 ```bash
-./mac_crash_audit.sh
+./mac_crash_audit.sh 7
 ```
 
-### Specify a Timeframe
+### Custom Timeframe
 ```bash
-./mac_crash_audit.sh 7  # Checks the past 7 days
+./mac_crash_audit.sh 3   # Last 3 days
+./mac_crash_audit.sh 14  # Last 2 weeks
 ```
 
 ### Run with Admin Privileges
-For full system access (recommended):
 ```bash
-sudo ./mac_crash_audit.sh
+sudo ./mac_crash_audit.sh 7
 ```
 
 ## What the Script Checks
@@ -70,14 +70,6 @@ sudo ./mac_crash_audit.sh
    - Copy saved to: `~/Desktop/crash_issue_sysdiagnose_YYYYMMDD_HHMMSS.tar.gz`
    - Collection requires admin privileges and may take several minutes
 
-## For IT Support Teams
-
-If assisting a user remotely:
-1. Have them download the script
-2. Guide them to Terminal
-3. Run: `cd Desktop && sudo bash mac_crash_audit.sh 7`
-4. Collect both files from their Desktop
-5. Review the audit report first - it will indicate the type of issue
 
 ## Understanding Results
 
